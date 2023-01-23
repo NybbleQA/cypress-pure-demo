@@ -1,0 +1,21 @@
+{
+  "name": "cypress-demo",
+  "version": "1.0.0",
+  "description": "test cypress",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "keywords": [
+    "qa",
+    "testing",
+    "javascript",
+    "cypress"
+  ],
+  "author": "fede",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.3.0"
+  }
+}
