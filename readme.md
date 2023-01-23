@@ -1,6 +1,6 @@
 			Cypress/Cucumber -- Project Creation Guidelines
 
-1) *Global dependencies
+******************************** 1) GLOBAL DEPENDENCIES ********************************
 
 	- Node.JS --> Ver. 16.17.0 (Windows - Current)
 		https://nodejs.org/ (LTS VERSION IF POSSIBLE)
@@ -21,7 +21,7 @@
 	- (Desired-Optional) Java 8 (for running Allure reports)
 
 
-2) *General annotations/acronyms
+******************************** 2) GENERAL ANNOTATIONS/ACRONYMS ********************************
 
 	"Execute" = to run a command by console line (bash/powershell/cmd)
 	"CL" = command line
@@ -54,7 +54,7 @@
 
 	- Execute "npm install cypress --save-dev"
 
-	- Inside package.json, create a script (inside scripts section) named "script_name": "cypress open" and SAVE CHANGES --> This will generate the cypress folder structure
+	- Inside package.json, create a script (inside scripts section) named "script_name": "cypress open" and SAVE CHANGES --> This will generate the cypress folder 		structure
 	- Execute "npm run script_name" --> Cypress client will open
 	
 	- Select "E2E Testing" option --> Cypress will list the files & folders added to the project
@@ -89,4 +89,4 @@
 
 	- Save changes (ALWAYS)
 
-	- Now we can execute both "npm run" commands (from package.json) containing "cypress open" AND "cypress run" scripts --> both should get access to the created ".cy.js" example file and run the test.
+	- Now we can execute both "npm run" commands (from package.json) containing "cypress open" AND "cypress run" scripts --> both should get access to the created 		".cy.js" example file and run the test.
