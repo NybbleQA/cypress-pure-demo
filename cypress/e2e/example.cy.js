@@ -12,13 +12,3 @@ describe('template spec for a login in todo.ly', () => {
       
     })
 })
-
-describe('scenario description', () => 
-{
-    it('expected result', () =>
-    {
-        cy.visit('https://todo.ly')
-        cy.get('.HPHeaderLogin > a > img').click()
-    })
-
-})
