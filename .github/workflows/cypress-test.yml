@@ -1,0 +1,54 @@
+name: Cypress CI integration
+
+on: push
+
+jobs:
+  cypress-run:
+    strategy:
+      fail-fast: false #debuggin param - turn off before deploying to prod
+      matrix:
+        #os: [ubuntu-latest, macos-latest, windows-latest]
+        browsers: [firefox, chrome, edge]
+    runs-on: ubuntu-22.04
+
+    steps:
+    ## Checkout a Git repository at a particular version under $GITHUB_WORKSPACE,
+    # so your workflow can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 #only will use last commit 
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+    
+      - name: Install Dependencies
+        run: npm ci
+    
+      - name: Run Cypress Tests
+        run: npm run cypress:run -- --browser ${{ matrix.browsers }}
+
+      # - name: Upload Artifacts
+      #   if: ${{ failure() || success()}}
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{ matrix.browsers }}-test-reports
+      #     path: /home/runner/work/cypress-cucumber-pageobject-demo/cypress-cucumber-pageobject-demo/cypress/reports
+
+      - name: Send GitHub Action trigger data to Slack workflow
+        if: ${{ failure() || success()}}
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # This data can be any valid JSON from a previous step in the GitHub Action
+          payload: |
+            {
+              "text":"GitHub build result: ${{ job.status }}\nCommit dif: ${{ github.event.pull_request.html_url || github.event.head_commit.url }} \nBuild GitActions: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "key": "value",
+              "foo": "bar"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    
